@@ -28,7 +28,7 @@ function createGalleryCard(galleryItems) {
 
 function onCardGalleryClick(event) {
     event.preventDefault();
-    if (!event.target.nodeName !== "IMG") {
+    if (event.target.nodeName !== "IMG") {
         return;
     }
 
