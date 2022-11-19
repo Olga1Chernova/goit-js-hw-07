@@ -5,24 +5,22 @@ import { galleryItems } from './gallery-items.js';
 const commonGallery = document.querySelector(".gallery");
 const galleryCards = createGalleryCard(galleryItems);
 commonGallery.insertAdjacentHTML('beforeend', galleryCards);
-commonGallery.addEventListener('click', onCardGalleryClick);
+commonGallery.addEventListener("click", onCardGalleryClick);
 const modalImg = basicLightbox.create(`<img>`);
 
 
 function createGalleryCard(galleryItems) {
     return galleryItems
         .map(({ preview, original, description }) => {
-        `<div class = "gallery__item">
-            <li>
-                <a class = "gallery__link" href = "${original}">
+        return `<div class = "gallery__item">
+                    <a class = "gallery__link" href = "${original}">
                     <img class = "gallery__image"
                     src = "${preview}" 
                     alt = "${description}">
                     data-source = "${original}"
-                    </img>
-            </li> 
-            </a>
-        </div>`;
+                    />
+                </a>
+            </div>`;
     
     })
         .join("");
@@ -30,12 +28,13 @@ function createGalleryCard(galleryItems) {
 
 function onCardGalleryClick(event) {
     event.preventDefault();
-    
     if (!event.target.nodeName !== "IMG") {
         return;
     }
 
-    const originalImgURL = event.target.getAttribute('data-source');
+    
+
+    const originalImgURL = event.target.dataset.source;
     
     modalImg.element().querySelector('img').src = originalImgURL;
     modalImg.show();
