@@ -11,18 +11,18 @@ const modalImg = basicLightbox.create(`<img>`);
 
 function createGalleryCard(galleryItems) {
     return galleryItems
-        .map(({ preview, original, description }) => {
-        return `<div class = "gallery__item">
+        .map(({preview, original, description}) => {
+            return `<div class = "gallery__item">
                     <a class = "gallery__link" href = "${original}">
                     <img class = "gallery__image"
                     src = "${preview}" 
-                    alt = "${description}">
+                    alt = "${description}"
                     data-source = "${original}"
                     />
                 </a>
             </div>`;
-    
-    })
+
+        })
         .join("");
 }
 
@@ -32,22 +32,18 @@ function onCardGalleryClick(event) {
         return;
     }
 
-    
-
-    const originalImgURL = event.target.dataset.source;
-    
-    modalImg.element().querySelector('img').src = originalImgURL;
+    modalImg.element().querySelector('img').src = event.target.dataset.source;
     modalImg.show();
 
     document.addEventListener("keydown", onEscButtonClick);
 }
 
-function onEscButtonClick (event) {
+function onEscButtonClick(event) {
     if (!(modalImg.visible() && event.key === "Escape")) {
         return;
     }
 
     modalImg.close();
     document.removeEventListener("keydown", onEscButtonClick);
-        
+
 }
